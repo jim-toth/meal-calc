@@ -1,23 +1,28 @@
-import { combineReducers } from 'redux';
+// import { combineReducers } from 'redux';
 
 import { SET_API_KEY, API_KEY_ACTION } from './actions';
+import { ApiKeyState } from './types';
 
-function apiKey(state = [], action: API_KEY_ACTION) {
+
+const initialState: ApiKeyState = {
+  apiKey: 'intial'
+};
+
+function apiKey(state = initialState, action: API_KEY_ACTION): ApiKeyState {
+  console.log(action)
   switch (action.type) {
     case SET_API_KEY:
-      return [
+      return {
         ...state,
-        {
-          text: action.apiKey
-        }
-      ];
+        apiKey: action.apiKey
+      };
     default:
       return state;
   }
 }
 
-const apiKeyReducer = combineReducers({
-  apiKey
-})
+export default apiKey;
 
-export default apiKeyReducer;
+// const apiKeyReducer = combineReducers(apiKey)
+
+// export default apiKeyReducer;
