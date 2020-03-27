@@ -4,12 +4,14 @@ import { connect, ConnectedProps } from 'react-redux';
 import { setApiKey } from '../../store/actions';
 
 interface RootState {
-  apiKey: string
+  apiKey: string,
+  isApiKeyValid: boolean
 };
 
 const mapStateToProps = (state: RootState) => {
   return {
-    apiKey: state.apiKey
+    apiKey: state.apiKey,
+    isApiKeyValid: state.isApiKeyValid
   }
 };
 
@@ -26,19 +28,21 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux;
 
 const ApiKeyForm = (props: Props) => {
-  const [apiKey, setApiKey] = useState(props.apiKey);
+  const [apiKey, _setApiKey] = useState(props.apiKey);
+  const [isApiKeyValid] = useState(props.isApiKeyValid);
 
   return (
     <div className="ApiKeyInput">
       <div>
-        <label>API Key:</label>
+        <label>API Key: </label>
         <input
           type="text"
           placeholder="Enter your API key"
           defaultValue={props.apiKey}
-          onChange={(evt) => setApiKey(evt.target.value)} />
-        </div>
-      <div><button onClick={() => props.onSetApiKey(apiKey)}>Enter</button></div>
+          onChange={(evt) => _setApiKey(evt.target.value)} />
+        <button onClick={() => props.onSetApiKey(apiKey)}>Enter</button>
+        <span id="apiKeyStatus">{isApiKeyValid ? '✔️' : '❌' }</span>
+      </div>
     </div>
   );
 };

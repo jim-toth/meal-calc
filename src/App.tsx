@@ -10,6 +10,7 @@ function App() {
     <div className="App">
       <h1>Meal Calc</h1>
         <ApiKeyForm />
+        <hr />
         <MealCalc />
     </div>
   );

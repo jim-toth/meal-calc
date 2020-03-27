@@ -5,7 +5,7 @@ import { ApiKeyState } from './types';
 
 
 const initialState: ApiKeyState = {
-  apiKey: 'intial'
+  apiKey: null
 };
 
 function apiKey(state = initialState, action: API_KEY_ACTION): ApiKeyState {
